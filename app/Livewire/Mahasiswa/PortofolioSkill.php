@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Mahasiswa;
 
-use Livewire\Component;
-use App\Models\PortofolioSkill as PortofolioModel;
 use App\Livewire\Traits\ChecksFaseStatus;
+use App\Models\PortofolioSkill as PortofolioModel;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class PortofolioSkill extends Component
 {
@@ -14,7 +14,7 @@ class PortofolioSkill extends Component
     // Array untuk menampung 9 nilai domain (Skala 0-5)
     public $domains = [
         1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0,
-        6 => 0, 7 => 0, 8 => 0, 9 => 0
+        6 => 0, 7 => 0, 8 => 0, 9 => 0,
     ];
 
     public function mount()
@@ -23,9 +23,9 @@ class PortofolioSkill extends Component
         $this->checkFaseStatus('phase_1_active');
 
         // Jika form terbuka, cek apakah mahasiswa sudah pernah mengisi sebelumnya
-        if (!$this->isFaseClosed && Auth::check()) {
+        if (! $this->isFaseClosed && Auth::check()) {
             $portofolio = PortofolioModel::where('user_id', Auth::id())->first();
-            
+
             if ($portofolio) {
                 // Load data dari database ke properti array Livewire
                 for ($i = 1; $i <= 9; $i++) {
@@ -37,7 +37,9 @@ class PortofolioSkill extends Component
 
     public function simpanPortofolio()
     {
-        if ($this->isFaseClosed) return;
+        if ($this->isFaseClosed) {
+            return;
+        }
 
         // Validasi agar nilai wajib integer dari 0 sampai 5
         $rules = [];

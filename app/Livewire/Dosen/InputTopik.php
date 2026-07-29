@@ -2,17 +2,26 @@
 
 namespace App\Livewire\Dosen;
 
-use Livewire\Component;
-use App\Models\TopikTa;
 use App\Livewire\Traits\ChecksFaseStatus;
+use App\Models\TopikTa;
+use Livewire\Component;
 
 class InputTopik extends Component
 {
     use ChecksFaseStatus;
 
-    public $judul_topik, $deskripsi,$ruang_lingkup, $kategori = 'Bukan Projek',$kuota_mahasiswa = 1;
+    public $judul_topik;
+
+    public $deskripsi;
+
+    public $ruang_lingkup;
+
+    public $kategori = 'Bukan Projek';
+
+    public $kuota_mahasiswa = 1;
+
     public $mahasiswa_lama_id;
-    
+
     // Array untuk menampung 9 domain skill (0-5)
     public $requirement = [
         'domain_1' => 0, 'domain_2' => 0, 'domain_3' => 0,
@@ -27,7 +36,9 @@ class InputTopik extends Component
 
     public function simpanTopik()
     {
-        if ($this->isFaseClosed) return;
+        if ($this->isFaseClosed) {
+            return;
+        }
 
         $this->validate([
             'judul_topik' => 'required|string|max:255',
@@ -43,8 +54,8 @@ class InputTopik extends Component
             'kategori' => $this->kategori,
             'kuota_mahasiswa' => $this->kuota_mahasiswa,
             'pengusul_dosen_id' => auth()->id(),
-            'mahasiswa_lama_id' => $this->kategori === 'Tipe 1' ?$this->mahasiswa_lama_id : null,
-            'requirement' => in_array($this->kategori, ['Tipe 2', 'Tipe 3']) ?$this->requirement : null,
+            'mahasiswa_lama_id' => $this->kategori === 'Tipe 1' ? $this->mahasiswa_lama_id : null,
+            'requirement' => in_array($this->kategori, ['Tipe 2', 'Tipe 3']) ? $this->requirement : null,
         ]);
 
         session()->flash('message', 'Usulan Topik TA berhasil disimpan!');

@@ -2,16 +2,22 @@
 
 namespace App\Livewire\Mahasiswa;
 
+use App\Livewire\Traits\ChecksFaseStatus;
+use App\Models\TopikTa;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Models\TopikTa;
-use App\Livewire\Traits\ChecksFaseStatus;
 
 class InputJudulMandiri extends Component
 {
     use ChecksFaseStatus, WithFileUploads;
 
-    public $judul_topik,$deskripsi, $ruang_lingkup,$bukti_acc;
+    public $judul_topik;
+
+    public $deskripsi;
+
+    public $ruang_lingkup;
+
+    public $bukti_acc;
 
     public function mount()
     {
@@ -20,7 +26,9 @@ class InputJudulMandiri extends Component
 
     public function ajukanJudul()
     {
-        if ($this->isFaseClosed) return;
+        if ($this->isFaseClosed) {
+            return;
+        }
 
         $this->validate([
             'judul_topik' => 'required|min:10',
@@ -28,7 +36,7 @@ class InputJudulMandiri extends Component
             'bukti_acc' => 'required|file|mimes:pdf,jpg,png|max:2048', // Maks 2MB
         ]);
 
-        $path =$this->bukti_acc->store('bukti_acc_kaprodi', 'public');
+        $path = $this->bukti_acc->store('bukti_acc_kaprodi', 'public');
 
         TopikTa::create([
             'judul_topik' => $this->judul_topik,

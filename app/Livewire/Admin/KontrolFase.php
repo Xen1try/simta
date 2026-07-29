@@ -2,14 +2,16 @@
 
 namespace App\Livewire\Admin;
 
-use Livewire\Component;
 use App\Models\SistemKontrol;
 use Livewire\Attributes\Layout;
+use Livewire\Component;
 
 class KontrolFase extends Component
 {
     public $phase_1_active;
+
     public $phase_2_active;
+
     public $phase_3_active;
 
     public function mount()
@@ -18,9 +20,9 @@ class KontrolFase extends Component
         $kontrol = SistemKontrol::firstOrCreate(
             ['id' => 1],
             [
-                'phase_1_active' => false, 
-                'phase_2_active' => false, 
-                'phase_3_active' => false
+                'phase_1_active' => false,
+                'phase_2_active' => false,
+                'phase_3_active' => false,
             ]
         );
 
@@ -34,15 +36,15 @@ class KontrolFase extends Component
     public function togglePhase($phaseName)
     {
         $kontrol = SistemKontrol::first();
-        
+
         if ($kontrol) {
             // Balikkan nilai dari true ke false atau sebaliknya
-            $kontrol->{$phaseName} = !$kontrol->{$phaseName};
+            $kontrol->{$phaseName} = ! $kontrol->{$phaseName};
             $kontrol->save();
 
             // Perbarui state di frontend secara real-time
             $this->{$phaseName} = $kontrol->{$phaseName};
-            
+
             // Munculkan notifikasi sukses
             session()->flash('message', "Status $phaseName berhasil diperbarui!");
         }

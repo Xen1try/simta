@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Admin;
 
-use Livewire\Component;
-use App\Models\Role;
 use App\Models\Permission;
-use Livewire\Attributes\Layout;
+use App\Models\Role;
+use Livewire\Component;
 
 class RoleManager extends Component
 {
     public $roles;
+
     public $permissions;
 
     public function mount()
@@ -27,7 +27,7 @@ class RoleManager extends Component
     public function togglePermission($roleId, $permissionId)
     {
         $role = Role::find($roleId);
-        
+
         // Toggle relasi many-to-many
         $role->permissions()->toggle($permissionId);
 
@@ -39,4 +39,3 @@ class RoleManager extends Component
         return view('livewire.admin.role-manager');
     }
 }
-

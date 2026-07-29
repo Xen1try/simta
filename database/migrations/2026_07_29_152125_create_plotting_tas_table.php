@@ -10,20 +10,20 @@ return new class extends Migration
     {
         Schema::create('plotting_tas', function (Blueprint $table) {
             $table->id();
-            
+
             // Ubah semua onDelete menjadi 'no action' untuk menghindari cycle/multiple paths di SQL Server
             $table->foreignId('mahasiswa_id')
-                  ->constrained('users')
-                  ->onDelete('no action');
-            
+                ->constrained('users')
+                ->onDelete('no action');
+
             $table->foreignId('topik_id')
-                  ->constrained('topik_tas')
-                  ->onDelete('no action');
-            
+                ->constrained('topik_tas')
+                ->onDelete('no action');
+
             $table->foreignId('dosen_pembimbing_id')
-                  ->constrained('users')
-                  ->onDelete('no action');
-            
+                ->constrained('users')
+                ->onDelete('no action');
+
             // Status Lock oleh Panitia TA
             $table->boolean('is_locked')->default(false);
             $table->timestamps();

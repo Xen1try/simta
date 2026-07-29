@@ -20,6 +20,6 @@ class TopikTa extends Model
     public function mahasiswa()
     {
         // Asumsi kolom forein key-nya adalah 'user_id' atau sesuaikan dengan struktur Anda
-        return $this->belongsTo(User::class, 'user_id'); 
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

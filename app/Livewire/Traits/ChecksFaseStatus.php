@@ -13,9 +13,9 @@ trait ChecksFaseStatus
     public function checkFaseStatus($phaseColumn)
     {
         $kontrol = SistemKontrol::first();
-        
+
         // Jika data tidak ada atau status fase false (ditutup)
-        if (!$kontrol || !$kontrol->{$phaseColumn}) {
+        if (! $kontrol || ! $kontrol->{$phaseColumn}) {
             $this->isFaseClosed = true;
         }
     }

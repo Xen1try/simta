@@ -50,14 +50,14 @@ class RolePermissionSeeder extends Seeder
         DB::table('role_permissions')->insert([
             ['role_id' => 4, 'permission_id' => 5],
         ]);
-        
+
         // Data inisialisasi Sistem Kontrol (Satu baris default)
         DB::table('sistem_kontrols')->insert([
             'phase_1_active' => true,
             'phase_2_active' => false,
             'phase_3_active' => false,
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
     }
 }

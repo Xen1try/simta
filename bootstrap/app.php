@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Middleware\CheckPermission;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\CheckPermission; // Import middleware
+use Illuminate\Foundation\Configuration\Middleware; // Import middleware
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -20,4 +20,3 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
-

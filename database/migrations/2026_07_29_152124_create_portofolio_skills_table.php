@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('portofolio_skills', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Relasi ke Mahasiswa
-            
+
             // 9 Domain Skill (Skala misal: 0-5)
             $table->integer('domain_1')->default(0);
             $table->integer('domain_2')->default(0);
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('domain_7')->default(0);
             $table->integer('domain_8')->default(0);
             $table->integer('domain_9')->default(0);
-            
+
             $table->timestamps();
         });
     }

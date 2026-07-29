@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Akademik;
 
-use Livewire\Component;
 use App\Models\TopikTa;
+use Livewire\Component;
 
 class ApprovalKaprodi extends Component
 {
     // Property untuk menangani modal konfirmasi penolakan (jika ada)
     public $selectedId;
+
     public $isRejectModalOpen = false;
 
     // Fungsi aksi persetujuan
@@ -36,12 +37,12 @@ class ApprovalKaprodi extends Component
         // AKAR SOLUSINYA DI SINI:
         // Kita query ke SQL Server untuk mengambil topik yang berstatus 'Mandiri' dan 'Pending'
         $queryPending = TopikTa::where('asal_usul', 'Mandiri')
-                               ->where('status_approval_kaprodi', 'Pending')
-                               ->get();
+            ->where('status_approval_kaprodi', 'Pending')
+            ->get();
 
         // Kita "suapkan" data tersebut ke view menggunakan array binding
         return view('livewire.akademik.approval-kaprodi', [
-            'pendingJudul' => $queryPending
+            'pendingJudul' => $queryPending,
         ]);
     }
 }

@@ -38,10 +38,10 @@ class User extends Authenticatable implements PasskeyUser
 
     protected $guarded = ['id'];
 
-        protected $hidden = [
-            'password',
-            'remember_token',
-        ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     /**
      * Get the attributes that should be cast.
@@ -77,7 +77,7 @@ class User extends Authenticatable implements PasskeyUser
     // Helper untuk mengecek apakah user memiliki permission tertentu
     public function hasPermission($permission_code): bool
     {
-        if (!$this->role) {
+        if (! $this->role) {
             return false;
         }
 

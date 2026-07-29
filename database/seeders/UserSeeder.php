@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password123'),
                 'nomor_induk' => '198803242022031001',
                 'role_id' => 1, // Panitia
-                'status_ta' => 'N/A'
+                'status_ta' => 'N/A',
             ],
             // Akun Kaprodi
             [
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password123'),
                 'nomor_induk' => '198803242022031002',
                 'role_id' => 2, // Kaprodi
-                'status_ta' => 'N/A'
+                'status_ta' => 'N/A',
             ],
             // Akun Mahasiswa
             [
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password123'),
                 'nomor_induk' => '223443005',
                 'role_id' => 5, // Mahasiswa
-                'status_ta' => 'Belum Dapat Judul'
+                'status_ta' => 'Belum Dapat Judul',
             ],
             [
                 'name' => 'Arbiyan Saputra',
@@ -48,8 +48,8 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password123'),
                 'nomor_induk' => '223443028',
                 'role_id' => 5, // Mahasiswa
-                'status_ta' => 'Belum Dapat Judul'
-            ]
+                'status_ta' => 'Belum Dapat Judul',
+            ],
         ];
 
         DB::table('users')->insert($users);
