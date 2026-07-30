@@ -7,10 +7,10 @@ use App\Models\SistemKontrol;
 trait ChecksFaseStatus
 {
     // Properti publik yang akan dibaca oleh Blade
-    public $isFaseClosed = false;
+    public bool $isFaseClosed = false;
 
     // Fungsi untuk mengecek status fase spesifik
-    public function checkFaseStatus($phaseColumn)
+    public function checkFaseStatus(string $phaseColumn): void
     {
         $kontrol = SistemKontrol::first();
 

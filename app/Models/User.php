@@ -68,20 +68,21 @@ class User extends Authenticatable implements PasskeyUser
             : $initials;
     }
 
-    // Relasi ke tabel Roles
-    public function role(): BelongsTo
+    // ... kode atas tetap sama ...
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Role, $this>
+     */
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
 
-    // Helper untuk mengecek apakah user memiliki permission tertentu
-    public function hasPermission($permission_code): bool
+    // Tambahkan tipe string pada parameter
+    public function hasPermission(string $permission_code): bool
     {
-        if (! $this->role) {
-            return false;
-        }
-
-        // Cek apakah permission_code ada di dalam daftar permission milik role user ini
+        if (!$this->role) return false;
+        
         return $this->role->permissions->contains('permission_code', $permission_code);
     }
 }

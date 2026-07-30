@@ -10,8 +10,11 @@ class Permission extends Model
     protected $guarded = ['id'];
 
     // Relasi Many-to-Many ke tabel roles
-    public function roles(): BelongsToMany
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\Role, $this>
+     */
+    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Role::class, 'role_permissions', 'permission_id', 'role_id');
+        return $this->belongsToMany(Role::class, 'role_permissions');
     }
 }

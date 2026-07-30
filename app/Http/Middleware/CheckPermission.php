@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckPermission
 {
-    public function handle(Request $request, Closure $next, $permission): Response
+    public function handle(Request $request, Closure $next, string $permission): Response
     {
         // Pastikan user sudah login
         if (! Auth::check()) {

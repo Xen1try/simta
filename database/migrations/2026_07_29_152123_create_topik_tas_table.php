@@ -22,10 +22,10 @@ return new class extends Migration
             $table->json('requirement')->nullable();
 
             // Relasi ke Dosen yang mengusulkan
-            $table->foreignId('pengusul_dosen_id')->nullable()->constrained('users')->noActionOnDelete('cascade');
+            $table->foreignId('pengusul_dosen_id')->nullable()->constrained('users')->onDelete('no action');
 
             // Relasi ke Mahasiswa (Untuk Tipe 1 - Mahasiswa Lama)
-            $table->foreignId('mahasiswa_lama_id')->nullable()->constrained('users')->noActionOnDelete('set null');
+            $table->foreignId('mahasiswa_lama_id')->nullable()->constrained('users')->onDelete('no action');
 
             // Approval Kaprodi
             $table->enum('status_approval_kaprodi', ['Pending', 'Approved', 'Rejected'])->default('Pending');

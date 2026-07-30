@@ -2,19 +2,17 @@
 
 namespace App\Livewire\Akademik;
 
-use App\Models\TopikTa;
 use Livewire\Component;
+use App\Models\TopikTa;
 
 class ApprovalKaprodi extends Component
 {
-    // Property untuk menangani modal konfirmasi penolakan (jika ada)
-    public $selectedId;
+    public ?int $selectedId = null;
+    public bool $isRejectModalOpen = false;
 
-    public $isRejectModalOpen = false;
-
-    // Fungsi aksi persetujuan
-    public function approve($id)
+    public function approve(int $id): void
     {
+        /** @var \App\Models\TopikTa $topik */
         $topik = TopikTa::find($id);
         if ($topik) {
             $topik->update(['status_approval_kaprodi' => 'Approved']);
@@ -22,9 +20,9 @@ class ApprovalKaprodi extends Component
         }
     }
 
-    // Fungsi aksi penolakan
-    public function reject($id)
+    public function reject(int $id): void
     {
+        /** @var \App\Models\TopikTa $topik */
         $topik = TopikTa::find($id);
         if ($topik) {
             $topik->update(['status_approval_kaprodi' => 'Rejected']);
@@ -32,17 +30,14 @@ class ApprovalKaprodi extends Component
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
-        // AKAR SOLUSINYA DI SINI:
-        // Kita query ke SQL Server untuk mengambil topik yang berstatus 'Mandiri' dan 'Pending'
         $queryPending = TopikTa::where('asal_usul', 'Mandiri')
-            ->where('status_approval_kaprodi', 'Pending')
-            ->get();
+                               ->where('status_approval_kaprodi', 'Pending')
+                               ->get();
 
-        // Kita "suapkan" data tersebut ke view menggunakan array binding
         return view('livewire.akademik.approval-kaprodi', [
-            'pendingJudul' => $queryPending,
+            'pendingJudul' => $queryPending
         ]);
     }
 }

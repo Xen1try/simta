@@ -16,10 +16,11 @@ class TopikTa extends Model
         ];
     }
 
-    // Tambahkan di dalam class TopikTa
-    public function mahasiswa()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\User, $this>
+     */
+    public function mahasiswa(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        // Asumsi kolom forein key-nya adalah 'user_id' atau sesuaikan dengan struktur Anda
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'mahasiswa_lama_id');
     }
 }
