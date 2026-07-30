@@ -2,22 +2,25 @@
 
 namespace App\Livewire\Admin;
 
-use Livewire\Component;
-use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\View\View;
+use Livewire\Component;
 
 class RoleManager extends Component
 {
     public Collection $roles;
+
     public Collection $permissions;
 
     public function mount(): void
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = auth()->user();
-        
-        if (!$user->role || $user->role->role_slug !== 'panitia') {
+
+        if (! $user->role || $user->role->role_slug !== 'panitia') {
             abort(403, 'Akses Ditolak. Halaman ini khusus Super Admin / Panitia TA.');
         }
 
@@ -27,7 +30,7 @@ class RoleManager extends Component
 
     public function togglePermission(int $roleId, int $permissionId): void
     {
-        /** @var \App\Models\Role $role */
+        /** @var Role $role */
         $role = Role::find($roleId);
         if ($role) {
             $role->permissions()->toggle($permissionId);
@@ -35,7 +38,7 @@ class RoleManager extends Component
         }
     }
 
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         return view('livewire.admin.role-manager');
     }

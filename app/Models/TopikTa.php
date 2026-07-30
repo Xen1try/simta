@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TopikTa extends Model
 {
@@ -17,9 +18,9 @@ class TopikTa extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\User, $this>
+     * @return BelongsTo<User, $this>
      */
-    public function mahasiswa(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function mahasiswa(): BelongsTo
     {
         return $this->belongsTo(User::class, 'mahasiswa_lama_id');
     }

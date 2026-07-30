@@ -71,9 +71,9 @@ class User extends Authenticatable implements PasskeyUser
     // ... kode atas tetap sama ...
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Role, $this>
+     * @return BelongsTo<Role, $this>
      */
-    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
@@ -81,8 +81,10 @@ class User extends Authenticatable implements PasskeyUser
     // Tambahkan tipe string pada parameter
     public function hasPermission(string $permission_code): bool
     {
-        if (!$this->role) return false;
-        
+        if (! $this->role) {
+            return false;
+        }
+
         return $this->role->permissions->contains('permission_code', $permission_code);
     }
 }

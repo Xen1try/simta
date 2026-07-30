@@ -11,9 +11,9 @@ class Permission extends Model
 
     // Relasi Many-to-Many ke tabel roles
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\Role, $this>
+     * @return BelongsToMany<Role, $this>
      */
-    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'role_permissions');
     }

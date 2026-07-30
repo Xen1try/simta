@@ -2,13 +2,16 @@
 
 namespace App\Livewire\Admin;
 
-use Livewire\Component;
 use App\Models\SistemKontrol;
+use Illuminate\View\View;
+use Livewire\Component;
 
 class KontrolFase extends Component
 {
     public bool $phase_1_active = false;
+
     public bool $phase_2_active = false;
+
     public bool $phase_3_active = false;
 
     public function mount(): void
@@ -23,16 +26,16 @@ class KontrolFase extends Component
     {
         $kontrol = SistemKontrol::first();
         if ($kontrol) {
-            $kontrol->{$phaseName} = !$kontrol->{$phaseName};
+            $kontrol->{$phaseName} = ! $kontrol->{$phaseName};
             $kontrol->save();
             $this->{$phaseName} = (bool) $kontrol->{$phaseName};
-            
+
             $status = $kontrol->{$phaseName} ? 'Dibuka' : 'Ditutup';
             session()->flash('message', "Status {$phaseName} berhasil {$status}!");
         }
     }
 
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         return view('livewire.admin.kontrol-fase');
     }

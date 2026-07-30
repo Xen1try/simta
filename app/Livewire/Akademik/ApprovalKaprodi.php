@@ -2,17 +2,19 @@
 
 namespace App\Livewire\Akademik;
 
-use Livewire\Component;
 use App\Models\TopikTa;
+use Illuminate\View\View;
+use Livewire\Component;
 
 class ApprovalKaprodi extends Component
 {
     public ?int $selectedId = null;
+
     public bool $isRejectModalOpen = false;
 
     public function approve(int $id): void
     {
-        /** @var \App\Models\TopikTa $topik */
+        /** @var TopikTa $topik */
         $topik = TopikTa::find($id);
         if ($topik) {
             $topik->update(['status_approval_kaprodi' => 'Approved']);
@@ -22,7 +24,7 @@ class ApprovalKaprodi extends Component
 
     public function reject(int $id): void
     {
-        /** @var \App\Models\TopikTa $topik */
+        /** @var TopikTa $topik */
         $topik = TopikTa::find($id);
         if ($topik) {
             $topik->update(['status_approval_kaprodi' => 'Rejected']);
@@ -30,14 +32,14 @@ class ApprovalKaprodi extends Component
         }
     }
 
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         $queryPending = TopikTa::where('asal_usul', 'Mandiri')
-                               ->where('status_approval_kaprodi', 'Pending')
-                               ->get();
+            ->where('status_approval_kaprodi', 'Pending')
+            ->get();
 
         return view('livewire.akademik.approval-kaprodi', [
-            'pendingJudul' => $queryPending
+            'pendingJudul' => $queryPending,
         ]);
     }
 }
